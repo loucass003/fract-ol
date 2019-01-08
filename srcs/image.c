@@ -6,7 +6,7 @@
 /*   By: llelievr <llelievr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 00:36:51 by llelievr          #+#    #+#             */
-/*   Updated: 2018/12/22 21:38:48 by llelievr         ###   ########.fr       */
+/*   Updated: 2019/01/08 16:57:10 by llelievr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ t_img			*new_img(t_mlx *mlx, t_size size)
 	return (img);
 }
 
-t_img			*refresh_img(t_img *img)
+t_img			*clear_img(t_img *img)
 {
 	if (img->img_buf)
 		ft_bzero(img->img_buf, (img->size.width * img->size.height * 4));
 	return (img);
 }
 
-void			clear_img(t_mlx *inst, t_img *img)
+void			destroy_img(t_mlx *inst, t_img *img)
 {
 	if (!img)
 		return ;
@@ -42,8 +42,6 @@ void			clear_img(t_mlx *inst, t_img *img)
 
 t_bool			put_pixel(t_img *img, t_pixel p)
 {
-	if (p.x < 0 || p.x > img->size.width - 1 || p.y < 0 || p.y > img->size.height - 1)
-		return (FALSE);
 	ft_memmove(img->img_buf + (p.y * img->s_line) + (p.x * 4), &p.color, 4);
 	return (TRUE);
 }
